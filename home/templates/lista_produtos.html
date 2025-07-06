@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos - Controle de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .no-products { text-align: center; color: #777; margin-top: 20px; }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Produtos em Estoque</h1>
+
+    <a href="{% url 'adicionar_produto' %}" class="button">Adicionar Novo Produto</a> {# Vamos criar essa URL depois #}
+
+    {% if produtos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Registrado Em</th>
+                    <th>Última Atualização</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.descricao|default:"N/A" }}</td>
+                    <td>{{ produto.quantidade }}</td>
+                    <td>R$ {{ produto.preco|floatformat:2|default:"N/A" }}</td>
+                    <td>{{ produto.data_entrada|date:"d/m/Y H:i" }}</td>
+                    <td>{{ produto.ultima_atualizacao|date:"d/m/Y H:i" }}</td>
+                    <td>
+                        {# Links para editar/excluir - a serem implementados #}
+                        <a href="{% url 'editar_produto' produto.pk %}">Editar</a> |
+                        <a href="{% url 'excluir_produto' produto.pk %}">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-products">Nenhum produto cadastrado no estoque ainda.</p>
+    {% endif %}
+</body>
+</html>

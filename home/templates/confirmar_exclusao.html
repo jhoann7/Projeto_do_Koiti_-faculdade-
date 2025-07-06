@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Exclusão</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #dc3545; } /* Cor vermelha para alerta */
+        p { margin-bottom: 20px; }
+        .actions { display: flex; gap: 10px; }
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+        .cancel-button {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .cancel-button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <h1>Confirmar Exclusão de Produto</h1>
+    <p>Você tem certeza que deseja excluir o produto "<strong>{{ produto.nome }}</strong>"?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="delete-button">Confirmar Exclusão</button>
+            <a href="{% url 'lista_produtos' %}" class="cancel-button">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>
