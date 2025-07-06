@@ -1,20 +1,14 @@
-<h1>Cadastro de usuário</h1>
-<form method="Post">
-    {% csrf_token %}
-    <label>Nome:</label><br>
-    <input type="text" name="nome" required><br>
-
-    <label>Email:</label><br>
-    <input type="text" name="email" required><br>
-
-    <label>Login:</label><br>
-    <input type="text" name="login" required><br>
-
-    <label>Senha:</label><br>
-    <input type="password" name="senha" required><br>
-
-    <label>Confirmar senha:</label><br>
-    <input type="password" name="confirmar_senha" required><br><br>
-
-    <input type="submit" value="Cadastrar">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Inicial</title>
+</head>
+<body>
+    <h1>Bem-vindo à Página Inicial</h1>
+    <form method="POST" action="/">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Digite seu nome">
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
