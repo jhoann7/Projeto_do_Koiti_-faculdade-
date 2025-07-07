@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')), # Mantenha esta linha para as URLs de login/cadastro
     path('produtos/', home_views.lista_produtos, name='lista_produtos_root'), # Nova linha para a lista de produtos
+    path('', home_views.home, name='landing_page'), 
 ]
 

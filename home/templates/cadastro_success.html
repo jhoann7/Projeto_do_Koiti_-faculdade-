@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vindo ao Koiti!</title>
+    <title>Cadastro Realizado!</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -27,10 +27,16 @@
             margin-bottom: 30px;
         }
         h1 {
-            color: #ff8c00; /* Laranja vibrante para o título */
+            color: #4CAF50; /* Verde para sucesso */
             font-size: 3.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: #ff8c00; /* Laranja para o subtítulo */
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: normal;
         }
         p {
             color: #ccc;
@@ -39,7 +45,7 @@
         }
         .main-button {
             display: inline-block;
-            background-color: #4CAF50; /* Verde para o botão de cadastro */
+            background-color: #ff8c00; /* Laranja vibrante para o botão */
             color: white;
             padding: 15px 30px;
             text-decoration: none;
@@ -51,7 +57,7 @@
             margin-top: 20px;
         }
         .main-button:hover {
-            background-color: #45a049; /* Verde mais escuro no hover */
+            background-color: #e07b00; /* Laranja mais escuro no hover */
             transform: translateY(-2px); /* Efeito de "levantar" */
         }
         .login-link {
@@ -67,17 +73,46 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+        /* Estilo para o link de Sair */
+        .logout-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.1em;
+        }
+        .logout-link a {
+            color: #ff8c00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logout-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+    {% if usuario %}
+        <div class="logout-link">
+            <a href="{% url 'logout' %}">Sair ({{ usuario.nome }})</a>
+        </div>
+    {% endif %}
+
     <div class="main-content">
-        <h1>Bem-vindo ao controlstoque!</h1>
-        <p>Seu controle de estoque inteligente e simplificado.</p>
-        <a href="{% url 'cadastro' %}" class="main-button">Criar Cadastro</a>
+        {% if usuario %}
+            <h1>Bem-vindo, {{ usuario.nome }}!</h1>
+            <h2>Sua jornada no controlstoque começou!</h2>
+            <p>O painel de controle está esperando por você. Gerencie seus produtos com total autonomia!</p>
+        {% else %}
+            <h1>Cadastro Realizado!</h1>
+            <h2>Sua conta foi criada com sucesso.</h2>
+            <p>Faça login para começar a gerenciar seu estoque.</p>
+        {% endif %}
+        
+        <a href="{% url 'lista_produtos' %}" class="main-button">Ver Minha Lista de Produtos</a>
     </div>
 
     <div class="login-link">
-        <p>Já tem uma conta? <a href="{% url 'login' %}">Faça Login</a></p>
+        <p>Ou, se preferir, <a href="{% url 'login' %}">faça login</a></p>
     </div>
 </body>
 </html>
