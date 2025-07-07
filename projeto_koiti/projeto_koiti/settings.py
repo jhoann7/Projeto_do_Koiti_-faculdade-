@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9f-!uj35&eyajryd1)(=d35@fyna_1onz_c-vj1*z@p)@@q!m1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -123,9 +123,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['https://projeto-do-koiti-faculdade-c69t0s6wg-jhoanns-projects.vercel.app/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://projeto-do-koiti-faculdade-2hca.vercel.app/', 'localhost', '127.0.0.1']
 
-DEBUG = False
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # Onde o Django vai coletar os arquivos estáticos
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # Esta linha é crucial
