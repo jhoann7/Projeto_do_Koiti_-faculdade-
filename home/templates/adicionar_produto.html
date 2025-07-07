@@ -6,55 +6,73 @@
     <title>Adicionar Novo Produto</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1a1a1a; /* Fundo preto */
             color: #f0f0f0; /* Texto cinza claro */
-            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+        }
+        .main-content { /* Classe para centralizar e estilizar o container principal */
+            background-color: #333; /* Fundo do container cinza escuro */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
         }
         h1 {
             color: #ff8c00; /* Laranja para o título */
+            font-size: 2.5em;
             margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         form {
-            background-color: #333; /* Fundo do formulário cinza escuro */
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 500px;
+            text-align: left;
             margin-top: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
             color: #f0f0f0;
         }
         input[type="text"],
         input[type="number"],
         textarea {
-            width: calc(100% - 20px);
+            width: calc(100% - 22px); /* Ajuste para padding e borda */
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #555; /* Borda cinza */
-            border-radius: 4px;
-            background-color: #444; /* Fundo do input cinza mais escuro */
-            color: #f0f0f0; /* Texto do input cinza claro */
+            border: 1px solid #555;
+            border-radius: 6px;
+            background-color: #444;
+            color: #f0f0f0;
+            font-size: 1em;
         }
         button[type="submit"] {
-            background-color: #ff8c00; /* Laranja para o botão */
+            background-color: #4CAF50; /* Verde para adicionar */
             color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         button[type="submit"]:hover {
-            background-color: #e07b00; /* Laranja mais escuro no hover */
+            background-color: #45a049;
+            transform: translateY(-1px);
         }
         .errorlist {
-            color: #f44336; /* Vermelho para erros */
+            color: #f44336;
             list-style-type: none;
             padding: 0;
             margin-bottom: 10px;
@@ -62,10 +80,11 @@
         }
         .back-link {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 25px;
             color: #ff8c00; /* Laranja para o link de voltar */
             text-decoration: none;
             font-weight: bold;
+            font-size: 1em;
         }
         .back-link:hover {
             text-decoration: underline;
@@ -73,14 +92,16 @@
     </style>
 </head>
 <body>
-    <h1>Adicionar Novo Produto</h1>
+    <div class="main-content">
+        <h1>Adicionar Novo Produto</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Salvar Produto</button>
+        </form>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Salvar Produto</button>
-    </form>
-
-    <a href="{% url 'lista_produtos' %}" class="back-link">Voltar para a Lista de Produtos</a>
+        <a href="{% url 'lista_produtos' %}" class="back-link">Voltar para a Lista de Produtos</a>
+    </div>
 </body>
 </html>
