@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "projeto_koiti/projeto_koiti/wsgi.py",
+      "src": "projeto_koiti/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "projeto_koiti/projeto_koiti/wsgi.py"
+      "dest": "projeto_koiti/wsgi.py"
     }
   ]
 }
