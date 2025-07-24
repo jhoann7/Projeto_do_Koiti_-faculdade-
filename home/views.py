@@ -1,11 +1,8 @@
-# home/views.py
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Usuario, Produto
 from .forms import ProdutoForm
 
-# Decorador customizado (mantenha como está)
 def usuario_required(view_func):
     def wrapper(request, *args, **kwargs):
         usuario_id = request.session.get('usuario_id')
@@ -22,10 +19,7 @@ def usuario_required(view_func):
         return view_func(request, *args, **kwargs)
     return wrapper
 
-# --- MODIFICAÇÃO NA VIEW home ---
 def home(request):
-    # Removemos a lógica de verificar o usuário logado aqui.
-    # A página home agora será sempre a mesma, independentemente do login.
     return render(request, 'home.html')
 
 def cadastro(request):
@@ -70,7 +64,7 @@ def login_view(request):
 
         try:
             usuario = Usuario.objects.get(login=login_input)
-            if usuario.senha == senha: # Em um sistema real, use hash de senha!
+            if usuario.senha == senha:
                 request.session['usuario_id'] = usuario.id
                 messages.success(request, 'Login realizado com sucesso!')
                 return redirect('cadastro_success')
@@ -82,9 +76,9 @@ def login_view(request):
 
 def logout_view(request):
     if 'usuario_id' in request.session:
-        del request.session['usuario_id'] # Remove o ID do usuário da sessão
+        del request.session['usuario_id']
     messages.info(request, 'Você foi desconectado.')
-    return redirect('home') # Redireciona para a tela inicial
+    return redirect('home')
 
 @usuario_required
 def lista_produtos(request):
