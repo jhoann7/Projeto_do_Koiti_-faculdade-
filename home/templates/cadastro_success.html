@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a; /* Fundo preto */
-            color: #f0f0f0; /* Texto cinza claro */
+            background-color: #1a1a1a;
+            color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,7 +18,7 @@
             text-align: center;
         }
         .main-content {
-            background-color: #333; /* Fundo do container cinza escuro */
+            background-color: #333;
             padding: 50px 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
@@ -27,13 +27,13 @@
             margin-bottom: 30px;
         }
         h1 {
-            color: #4CAF50; /* Verde para sucesso */
+            color: #4CAF50;
             font-size: 3.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         h2 {
-            color: #ff8c00; /* Laranja para o subtítulo */
+            color: #ff8c00;
             font-size: 1.8em;
             margin-bottom: 20px;
             font-weight: normal;
@@ -45,7 +45,7 @@
         }
         .main-button {
             display: inline-block;
-            background-color: #ff8c00; /* Laranja vibrante para o botão */
+            background-color: #ff8c00;
             color: white;
             padding: 15px 30px;
             text-decoration: none;
@@ -57,23 +57,9 @@
             margin-top: 20px;
         }
         .main-button:hover {
-            background-color: #e07b00; /* Laranja mais escuro no hover */
-            transform: translateY(-2px); /* Efeito de "levantar" */
+            background-color: #e07b00;
+            transform: translateY(-2px);
         }
-        .login-link {
-            display: block;
-            margin-top: 30px;
-            font-size: 1.1em;
-        }
-        .login-link a {
-            color: #ff8c00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-        /* Estilo para o link de Sair */
         .logout-link {
             position: absolute;
             top: 20px;
@@ -98,17 +84,17 @@
     {% endif %}
 
     <div class="main-content">
-        {% if usuario %}
-            <h1>Bem-vindo, {{ usuario.nome }}!</h1>
-            <h2>Sua jornada no controlstoque começou!</h2>
+        {% if usuario and empresa %}
+            <h1>Bem-vindo à {{ empresa.nome }}, {{ usuario.nome }}!</h1>
+            <h2>Sua jornada no CONTROLSTOQUE começou!</h2>
             <p>O painel de controle está esperando por você. Gerencie seus produtos com total autonomia!</p>
+            <a href="{% url 'lista_produtos' %}" class="main-button">Ver Meus Produtos</a>
         {% else %}
             <h1>Cadastro Realizado!</h1>
             <h2>Sua conta foi criada com sucesso.</h2>
             <p>Faça login para começar a gerenciar seu estoque.</p>
+            <a href="{% url 'login' %}" class="main-button">Fazer Login</a>
         {% endif %}
-        
-        <a href="{% url 'lista_produtos' %}" class="main-button">Ver Minha Lista de Produtos</a>
     </div>
 
 </body>

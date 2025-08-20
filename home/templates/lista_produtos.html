@@ -100,6 +100,10 @@
 
     <a href="{% url 'adicionar_produto' %}" class="button">Adicionar Novo Produto</a>
 
+    {% if usuario.is_admin %}
+        <a href="{% url 'lista_usuarios' %}" class="button" style="background-color: #4CAF50;">Gerenciar Usuários</a>
+    {% endif %}
+
     {% if produtos %}
         <table>
             <thead>

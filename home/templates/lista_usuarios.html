@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Usuários - {{ usuario.empresa.nome }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Fundo preto */
+            color: #f0f0f0; /* Texto cinza claro */
+            margin: 20px;
+        }
+        h1 {
+            color: #ff8c00; /* Laranja para o título */
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #333; /* Fundo da tabela cinza escuro */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden; /* Para cantos arredondados na tabela */
+        }
+        th, td {
+            border: 1px solid #444; /* Borda da célula mais escura */
+            padding: 12px;
+            text-align: left;
+            color: #f0f0f0; /* Cor do texto da célula */
+        }
+        th {
+            background-color: #555; /* Fundo do cabeçalho da tabela */
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #3a3a3a; /* Linhas pares com um cinza ligeiramente diferente */
+        }
+        .button {
+            display: inline-block;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px; /* Espaçamento entre botões */
+        }
+        .button:hover {
+            transform: translateY(-1px);
+        }
+        .button-add {
+            background-color: #4CAF50; /* Verde para adicionar */
+        }
+        .button-add:hover {
+            background-color: #45a049;
+        }
+        .button-back {
+            background-color: #6c757d; /* Cinza para voltar */
+        }
+        .button-back:hover {
+            background-color: #5a6268;
+        }
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .messages li.success {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* --- ESTILO ATUALIZADO PARA OS BOTÕES DE AÇÃO --- */
+        td a {
+            color: white; /* Cor do texto dos links */
+            text-decoration: none;
+            margin-right: 10px;
+            padding: 5px 10px; /* Adiciona um pouco de espaço ao redor do texto */
+            border-radius: 5px; /* Arredonda os cantos para parecerem botões */
+            font-size: 0.9em;
+            transition: background-color 0.2s ease;
+        }
+        .action-edit, .action-delete {
+            background-color: #ff8c00; /* Fundo laranja */
+            color: #1a1a1a; /* Texto escuro para melhor contraste */
+            font-weight: bold;
+        }
+        .action-edit:hover, .action-delete:hover {
+            background-color: #e07b00; /* Laranja mais escuro no hover */
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Usuários da Empresa: {{ usuario.empresa.nome }}</h1>
+
+    <a href="{% url 'adicionar_usuario' %}" class="button button-add">Adicionar Novo Usuário</a>
+    <a href="{% url 'lista_produtos' %}" class="button button-back" style="background-color: #e07b00;">Voltar para Produtos</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Login</th>
+                <th>Admin</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in usuarios %}
+            <tr>
+                <td>{{ u.nome }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.login }}</td>
+                <td>
+                    {% if u.is_admin %}
+                        <strong>Sim</strong>
+                        {% if u == primeiro_admin %}
+                            (Principal)
+                        {% endif %}
+                    {% else %}
+                        Não
+                    {% endif %}
+                </td>
+                <td>
+                    {% if u == usuario %}
+                        (Você)
+                    {% elif u == primeiro_admin %}
+                        -
+                    {% else %}
+                        <a href="{% url 'editar_usuario' u.pk %}" class="action-edit">Editar</a>
+                        <a href="{% url 'excluir_usuario' u.pk %}" class="action-delete">Excluir</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
